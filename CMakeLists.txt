@@ -188,7 +188,7 @@ catkin_install_python(PROGRAMS
 )
 
 catkin_install_python(PROGRAMS
-  scripts/drone_init.py
+  scripts/drone_control.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
