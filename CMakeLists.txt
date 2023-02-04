@@ -162,33 +162,40 @@ include_directories(
 
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
+
+
 catkin_install_python(PROGRAMS
-  scripts/include.py
+  scripts/archive/rcoverride.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
 catkin_install_python(PROGRAMS
-  scripts/joy_stick_control.py
+  scripts/archive/sample.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
 catkin_install_python(PROGRAMS
-  scripts/rcoverride.py
+  scripts/translator.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
 catkin_install_python(PROGRAMS
-  scripts/sample.py
+  scripts/global_control.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
 catkin_install_python(PROGRAMS
-  scripts/joy_control.py
+  scripts/fcu_modes.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
 catkin_install_python(PROGRAMS
-  scripts/drone_control.py
+  scripts/local_control.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+catkin_install_python(PROGRAMS
+  scripts/altitude_control.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
