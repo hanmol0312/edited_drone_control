@@ -1,1 +1,4 @@
+.gitinore
 .vscode
+./scripts/mavsdk
+./scripts/archive
