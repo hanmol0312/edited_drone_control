@@ -2,4 +2,3 @@
 .vscode
 ./scripts/mavsdk
 ./scripts/archive
-./scripts/test.py
