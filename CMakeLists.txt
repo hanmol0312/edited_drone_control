@@ -205,8 +205,14 @@ catkin_install_python(PROGRAMS
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
+
 catkin_install_python(PROGRAMS
-  scripts/local_position_sub.py
+  scripts/draw_square.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+catkin_install_python(PROGRAMS
+  scripts/teleop_key.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 # catkin_install_python(PROGRAMS
