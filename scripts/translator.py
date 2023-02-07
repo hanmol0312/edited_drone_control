@@ -27,15 +27,15 @@ def joycb(msg: Joy):
     drone.arm = joy_input.buttons[0]
     drone.disarm = joy_input.buttons[3]
     drone.mode = joy_input.buttons[2]
-    drone.RTL = joy_input.buttons[1]
-    rospy.loginfo(" %s , %s , %s , %s",drone.thrust,drone.yaw,drone.pitch, drone.roll)
+    drone.hold = joy_input.buttons[1]
+
 
 def main():
     
     rospy.init_node("translator")
     pub = rospy.Publisher("/RPTY",drone,queue_size=10)
     sub = rospy.Subscriber("/joy",Joy,callback = joycb)
-    print(type(joy_input.axes))
+    rospy.loginfo("Translator launched, publishing to RPTY topic")
     rospy.spin()
 
 main()

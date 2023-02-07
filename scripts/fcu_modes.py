@@ -8,6 +8,8 @@ from mavros_msgs.srv import CommandBool, CommandTOL, SetMode, SetModeRequest
 
 class flight_modes():
     def __init__(self) -> None:
+        drone_state = State()
+        rate = rospy.Rate(20)
         pass
 
     def setArm(self):
@@ -17,6 +19,7 @@ class flight_modes():
             arm.call(True)
         except rospy.ServiceException:
             rospy.loginfo("Could not arm")
+        
 
     def setDisArm(self):
         rospy.wait_for_service("/mavros/cmd/arming")
