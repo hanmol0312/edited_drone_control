@@ -22,5 +22,6 @@
 		<arg name="fcu_protocol" value="$(arg fcu_protocol)" />
 		<arg name="respawn_mavros" default="$(arg respawn_mavros)" />
 	</include>
+	<node pkg="joy" type="joy_node" name="joy_ip" output="screen"/>
 	<!-- <node pkg="/* pkg_name */" type="/* exec_name */" name="/* node_name */" output="screen"/> -->
 </launch>

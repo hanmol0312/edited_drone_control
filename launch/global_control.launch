@@ -1,0 +1,5 @@
+<launch>
+    <include file="$(find px4_controller)/launch/px4_sitl.launch"/>
+    <node pkg="joy" type="joy_node" name="joy_input" output="screen"/>
+    <node pkg="px4_controller" type="global_control.py" name="global_control" output="screen"/>
+</launch>
