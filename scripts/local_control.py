@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+
+## add hold mode mapped to a button
 import rospy
 from mavros_msgs.srv import CommandBool, CommandBoolRequest, SetMode, SetModeRequest, CommandTOL, CommandTOLRequest
 from sensor_msgs.msg import Joy
@@ -122,18 +124,20 @@ def main():
     drone.offboard()
 
     # takeoff
-    rospy.loginfo("Takeoff initiated, target altitude is 2m")
-    
+    rospy.loginfo("Takeoff initiated, target altitude is 2m")        
 
     while not rospy.is_shutdown():
         if lc.local_pos.pose.position.z < 1.90:
             pub_local_position.publish(lc.setpoint_local)
         else:
             rospy.loginfo("Takeoff altitude reached")
-            pub_local_position.publish(lc.setpoint_local)
-            lc.update_setpoint()
-            lc.pos_x()
+            break
         rate.sleep()
-
+    
+    # key board teleoperation
+    rospy.loginfo("Keyboard teleoperation")
+    while not rospy.is_shutdown():
+        
+        rate.sleep()
 
 main()
