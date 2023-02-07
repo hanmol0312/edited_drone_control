@@ -6,7 +6,7 @@ int32 servo
 int32 mode 
 int32 arm
 int32 disarm
-int32 RTL
+int32 hold
 int32 camera
 int32 kill
 
