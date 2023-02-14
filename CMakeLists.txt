@@ -54,6 +54,7 @@ find_package(catkin REQUIRED COMPONENTS
 add_message_files(
   FILES
   drone.msg
+  key.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -175,17 +176,7 @@ catkin_install_python(PROGRAMS
 )
 
 catkin_install_python(PROGRAMS
-  scripts/translator.py
-  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
-
-catkin_install_python(PROGRAMS
   scripts/global_control.py
-  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
-
-catkin_install_python(PROGRAMS
-  scripts/fcu_modes.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
@@ -193,18 +184,6 @@ catkin_install_python(PROGRAMS
   scripts/local_control.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
-
-catkin_install_python(PROGRAMS
-  scripts/altitude_control.py
-  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
-
-
-catkin_install_python(PROGRAMS
-  scripts/arm.py
-  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
-
 
 catkin_install_python(PROGRAMS
   scripts/draw_square.py
@@ -215,6 +194,13 @@ catkin_install_python(PROGRAMS
   scripts/teleop_key.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
+
+catkin_install_python(PROGRAMS
+  scripts/test_this_joy_teleoperation.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+
 # catkin_install_python(PROGRAMS
 #   scripts/disarm.py
 #   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
