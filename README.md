@@ -30,4 +30,3 @@ Primary :
 - [ ] Make attitude control flight mode.
 - [ ] Make acceleration control flight mode.
 - [ ] Button activate all the individual nodes, write a master script, Integration.
-- [ ] 
