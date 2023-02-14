@@ -1,17 +1,5 @@
 # run the mavros node, joy node
-## basic script for joy stick control
-### Add more flight modes, yet to make a servo control, nest it in a forever loop in case of disarm.
-
-###### Todo list ###
-# add more joy stick inputs for different flight modes
-    # write a roslaunch for the whole thing, try to include the simulation too in the launch file
-    # mainly a kill switch
-    # arm and disarm
-    # return to launch
-    # hold mode 
-    # forbidden mode, acro mode
-# integrate a servo alongside it for arm control
-# make it into a forever loop incase of disarm, so that flight will go as planned
+## basic script for joy stick velocity control
 
 
 #!/usr/bin/env python3

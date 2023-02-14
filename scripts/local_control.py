@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-## add hold mode mapped to a button
+# depricated, use position_keyboard control
 import rospy
 from mavros_msgs.srv import CommandBool, CommandBoolRequest, SetMode, SetModeRequest, CommandTOL, CommandTOLRequest
 from sensor_msgs.msg import Joy

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+## makes the drone go in a square. just run the mavros node 
 ## add hold mode mapped to a button
 import rospy
 from mavros_msgs.srv import CommandBool, CommandBoolRequest, SetMode, SetModeRequest, CommandTOL, CommandTOLRequest
