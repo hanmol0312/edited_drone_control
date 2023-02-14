@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 
-## add hold mode mapped to a button
+# use this over local_control
+# run the mavros, teleop_key node in order to use this node
+## subscribe from the /keyboard/arrow to use for teleop
 import rospy
 from mavros_msgs.srv import CommandBool, CommandBoolRequest, SetMode, SetModeRequest, CommandTOL, CommandTOLRequest
 from sensor_msgs.msg import Joy
 from geometry_msgs.msg import Twist, PoseStamped, Point, TwistStamped
 from std_msgs.msg import String
 from px4_controller.msg import drone
+from px4_controller.msg import key
 
 class joy_input:
     def __init__(self):
@@ -75,30 +78,31 @@ class local_control:
     def update_setpoint(self):
         self.setpoint_local.pose.position.x = self.local_pos.pose.position.x
         self.setpoint_local.pose.position.y = self.local_pos.pose.position.y
-
+    
     def neg_x(self):
-        self.setpoint_local.pose.position.x -= 2
+        self.setpoint_local.pose.position.x -= 0.1
 
     def pos_x(self):
-        self.setpoint_local.pose.position.x += 2
+        self.setpoint_local.pose.position.x += 0.1
 
     def neg_y(self):
-        self.setpoint_local.pose.position.y -= 2
+        self.setpoint_local.pose.position.y -= 0.1
 
     def pos_y(self):
-        self.setpoint_local.pose.position.y += 2
+        self.setpoint_local.pose.position.y += 0.1
 
     def neg_z(self):
-        self.setpoint_local.pose.position.z -= 0.5
-
+        self.setpoint_local.pose.position.z -= 0.1
+    
     def pos_z(self):
-        self.setpoint_local.pose.position.y += 0.5
+        self.setpoint_local.pose.position.z += 0.1
 
-key=String()
+arrow_input=key()
 
-def subKey(msg:String):
-    global key
-    key=msg
+def arrow_cb(msg:key):
+    global arrow_input
+    arrow_input=msg
+    print(arrow_input)
 
 def main():
     rospy.init_node("drone_ip")
@@ -110,8 +114,7 @@ def main():
     sub_joy = rospy.Subscriber("/joy",Joy,callback = joy.joycb)
     # subscribes to the local position input
     sub_pos = rospy.Subscriber("/mavros/local_position/pose",PoseStamped,callback=lc.local_pos_cb)
-    sub_Key=rospy.Subscriber("/Key",String,callback=subKey)
-    
+    sub_arrow=rospy.Subscriber("/keyboard/arrow",key,callback=arrow_cb)
     # publishes to the local setpoint
     pub_local_position = rospy.Publisher("/mavros/setpoint_position/local",PoseStamped,queue_size=10)
     
@@ -145,22 +148,20 @@ def main():
     rospy.loginfo("Starting keyboard teleoperation")
     rospy.loginfo("Use the arrow keys, ctrl and shift")
 
+    # arrow_input.key_up, key_down, key_left, key_right
+
     while not rospy.is_shutdown():
-        if key.data == "Key.up":
+        if arrow_input.key_up:
             lc.pos_x()
-        elif key.data == "Key.down":
+        elif arrow_input.key_down:
             lc.neg_x()
-        elif key.data == "Key.left":
+        elif arrow_input.key_right:
             lc.neg_y()
-        elif key.data == "Key.right":
+        elif arrow_input.key_left:
             lc.pos_y()
-        elif key.data == "Key.shift":
-            lc.pos_z()
-        elif key.data == "Key.ctrl":
-            lc.pos_z()
-        else :
+        else:
             pass
+        # lc.update_setpoint()
         pub_local_position.publish(lc.setpoint_local)
-        lc.update_setpoint()
         rate.sleep()
 main()

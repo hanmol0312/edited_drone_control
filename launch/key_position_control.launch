@@ -22,6 +22,7 @@
 		<arg name="fcu_protocol" value="$(arg fcu_protocol)" />
 		<arg name="respawn_mavros" default="$(arg respawn_mavros)" />
 	</include>
+	<node pkg="px4_controller" type="position_keyboard_control.py" name="drone_controller" output="screen"/>
 	<node pkg="px4_controller" type="teleop_key.py" name="Key_input" output="screen"/>
 	<!-- <node pkg="px4_controller" type="position_keyboard_control.py" name="position_control" output="screen"/> -->
 </launch>
