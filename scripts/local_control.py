@@ -155,7 +155,7 @@ def main():
         elif key.data == "Key.right":
             lc.pos_y()
         elif key.data == "Key.shift":
-            lc.pos_z()
+            lc.neg_z()
         elif key.data == "Key.ctrl":
             lc.pos_z()
         else :

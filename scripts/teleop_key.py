@@ -7,7 +7,8 @@ from pynput.keyboard import Key, Listener
 import subprocess
 import sys
 import threading
-from px4_controller.msg import key
+from px4_controller.msg import key, buttons
+
 
 key_values = key()
 
@@ -15,17 +16,30 @@ key_state={
     "key_up":0,
     "key_down":0,
     "key_left":0,
-    "key_right":0
+    "key_right":0,
+    "key_left_shift":0,
+    "key_left_ctrl":0
+}
+
+button_state={
+    "button_1":0,
+    "button_2":0,
+    "button_3":0,
+    "button_4":0,
+    "button_5":0,
+    "button_6":0
 }
 
 def printdict():
     rate = rospy.Rate(20)
     while True:
-        # print(key_state)
+        # print(button_state)
         key_values.key_up=key_state["key_up"]
         key_values.key_down=key_state["key_down"]
         key_values.key_left=key_state["key_left"]
         key_values.key_right=key_state["key_right"]
+        key_values.key_left_shift=key_state["key_left_shift"]
+        key_values.key_left_ctrl=key_state["key_left_ctrl"]
         pub.publish(key_values)
         rate.sleep()
 
@@ -42,6 +56,10 @@ def on(key:Key):
         key_state["key_left"]=1
     if(key==Key.right):
         key_state["key_right"]=1
+    if(key==Key.shift_l):
+        key_state["key_left_shift"]=1
+    if(key==Key.ctrl_l):
+        key_state["key_left_ctrl"]=1
 
 def off(key:Key):
     if(key==Key.up):
@@ -52,6 +70,10 @@ def off(key:Key):
         key_state["key_left"]=0
     if(key==Key.right):
         key_state["key_right"]=0
+    if(key==Key.shift_l):
+        key_state["key_left_shift"]=0
+    if(key==Key.ctrl_l):
+        key_state["key_left_ctrl"]=0
 
 rospy.init_node("Keypub")  
 pub=rospy.Publisher("/keyboard/arrow",key,queue_size=10)

@@ -7,7 +7,6 @@ import rospy
 from mavros_msgs.srv import CommandBool, CommandBoolRequest, SetMode, SetModeRequest, CommandTOL, CommandTOLRequest
 from sensor_msgs.msg import Joy
 from geometry_msgs.msg import Twist, PoseStamped, Point, TwistStamped
-from std_msgs.msg import String
 from px4_controller.msg import drone
 from px4_controller.msg import key
 
@@ -102,7 +101,6 @@ arrow_input=key()
 def arrow_cb(msg:key):
     global arrow_input
     arrow_input=msg
-    print(arrow_input)
 
 def main():
     rospy.init_node("drone_ip")
@@ -159,6 +157,10 @@ def main():
             lc.neg_y()
         elif arrow_input.key_left:
             lc.pos_y()
+        elif arrow_input.key_left_shift:
+            lc.pos_z()
+        elif arrow_input.key_left_ctrl:
+            lc.neg_z()
         else:
             pass
         # lc.update_setpoint()

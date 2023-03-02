@@ -55,6 +55,7 @@ add_message_files(
   FILES
   drone.msg
   key.msg
+  buttons.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -200,6 +201,15 @@ catkin_install_python(PROGRAMS
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
+catkin_install_python(PROGRAMS
+  scripts/arm.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+catkin_install_python(PROGRAMS
+  scripts/draw_square2.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
 
 # catkin_install_python(PROGRAMS
 #   scripts/disarm.py
