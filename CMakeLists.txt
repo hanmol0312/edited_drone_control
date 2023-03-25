@@ -66,17 +66,8 @@ add_message_files(
 # )
 
 ## Generate actions in the 'action' folder
-# add_action_files(
-#   FILES
-#   Action1.action
-#   Action2.action
-# )
-
-## Generate added messages and services with any dependencies listed here
-generate_messages(
-  DEPENDENCIES
-  geometry_msgs#   std_msgs
-)
+# add_action_fix4_controller
+  #geometry_msgs   std_msgs
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -208,6 +199,11 @@ catkin_install_python(PROGRAMS
 
 catkin_install_python(PROGRAMS
   scripts/draw_square2.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+catkin_install_python(PROGRAMS
+  scripts/position_control.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

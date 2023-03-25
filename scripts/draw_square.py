@@ -160,12 +160,12 @@ def main():
         if rospy.get_time() - now < 10:
             pub_local_position.publish(lc.setpoint_local)
             rate.sleep()
-        else: 
-            break
 
     lc.setpoint_local.pose.position.y -= 5
     while not rospy.is_shutdown():
-        pub_local_position.publish(lc.setpoint_local)
-        rate.sleep()
+        now=rospy.get_time()
+        if rospy.get_time() - now < 10:
+            pub_local_position.publish(lc.setpoint_local)
+            rate.sleep()
 
 main()

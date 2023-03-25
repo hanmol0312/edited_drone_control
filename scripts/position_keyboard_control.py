@@ -53,19 +53,13 @@ class fcumode:
         offb.custom_mode = "OFFBOARD"
         rospy.wait_for_service("/mavros/set_mode")
         rospy.loginfo("offboard=True")
-        try:
-            offb_client = rospy.ServiceProxy("/mavros/set_mode",SetMode)
-            offb_client.call(offb)
-            rospy.loginfo("Set to offboard")
-        except rospy.ServiceException:
-            rospy.logdebug("Mode change denied")
+        rospy.logdebug("Mode change denied")
 
 
 class local_control:
     def __init__(self):
         self.local_pos = PoseStamped()
         self.setpoint_local = PoseStamped()
-        
         self.setpoint_local.pose.position.x =0.0
         self.setpoint_local.pose.position.y =0.0
         self.setpoint_local.pose.position.z =2.0
@@ -115,7 +109,7 @@ def main():
     sub_arrow=rospy.Subscriber("/keyboard/arrow",key,callback=arrow_cb)
     # publishes to the local setpoint
     pub_local_position = rospy.Publisher("/mavros/setpoint_position/local",PoseStamped,queue_size=10)
-    
+                                                                        
     # send some initial setpoint to position
     rospy.loginfo("Sending a few initial setpoints")
     rate = rospy.Rate(20)
